@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- #
 
 module ArtsyAuth
-  VERSION = '0.0.3'.freeze
+  VERSION = '1.0.0'.freeze
 end
