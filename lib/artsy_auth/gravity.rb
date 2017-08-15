@@ -19,7 +19,7 @@ COOKIE_EXP = Time.now + 7 * 24 * 60 * 60
 module ArtsyAuth
   # Generates a URL for the gravity oauth access code which the server gets
   # given after a user successfullly logs in.
-  def oauth_url(code)
+  def self.oauth_url(code)
     query = [
       "client_id=#{APPLICATION_ID}",
       "client_secret=#{APPLICATION_SECRET}",
@@ -56,7 +56,7 @@ module ArtsyAuth
     def authorize(env)
       query = Rack::Utils.parse_nested_query(env['QUERY_STRING'])
       code = query['code']
-      url = oauth_url(code)
+      url = ArtsyAuth.oauth_url(code)
       response = open(url).read
       json = JSON.parse(response)
       return authorized(json) if valid_access_token?(json['access_token'])
