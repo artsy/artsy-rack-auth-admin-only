@@ -60,7 +60,7 @@ module ArtsyAuth
       response = open(url).read
       json = JSON.parse(response)
       return authorized(json) if valid_access_token?(json['access_token'])
-      unauthorized
+      not_admin
     end
 
     def authorized(json)
@@ -77,6 +77,10 @@ module ArtsyAuth
       response = Rack::Response.new
       response.redirect OAUTH_REDIRECT, 307
       response.finish
+    end
+
+    def not_admin
+      [403, { 'Content-Type' => 'text/plain' }, ['This is an Artsy-admin only page']]
     end
   end
 end
