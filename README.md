@@ -1,8 +1,11 @@
-# Artsy::Rack::Auth::Admin::Only
+# ArtsyAuth::Gravity
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/artsy/rack/auth/admin/only`. To experiment with that code, run `bin/console` for an interactive prompt.
+A really simple authentication tool that uses the JWT to authenticate. 
 
-TODO: Delete this and the text above, and describe your gem
+### Meta
+
+* __State:__ production
+* __Point People:__ [@orta](https://github.com/orta), [@wrgoldstein](https://github.com/wrgoldstein)
 
 ## Installation
 
@@ -16,20 +19,25 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install artsy-rack-auth-admin-only
-
 ## Usage
 
-TODO: Write usage instructions here
+In your rack project, add the following ENV vars:
 
-## Development
+```sh
+GRAVITY_URL = # A gravity API instance like https://api.artsy.net/
+APPLICATION_ID = # Your ClientApplication's ID
+APPLICATION_SECRET = # Your ClientApplication's secret
+APPLICATION_INTERNAL_SECRET = # Your ClientApplication's internal secret, you can get this via gravity console
+HOST = # Your site's public URL
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Then inside the file where you're configuring your app, add:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+require "artsy-rack-auth-admin-only"
+use ArtsyAuth::Gravity
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/artsy-rack-auth-admin-only.
+Bug reports and pull requests are welcome on GitHub at https://github.com/artsy/artsy-rack-auth-admin-only.
